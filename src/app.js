@@ -1,8 +1,12 @@
 import Express from 'express'
+import routes from './interface/routes/index.js'
+import logger from './interface/utils/logger.js'
+
 const app = Express()
 
-const PORT = process.env.PORT || 5000
+app.use(Express.json())
+app.use(routes)
 
-app.listen(PORT)
+const PORT = process.env.PORT || 3000
 
-console.log(`Server is  running on port ${PORT}`)
+app.listen(PORT, () => logger.info(`Server is running on port ${PORT}`))
