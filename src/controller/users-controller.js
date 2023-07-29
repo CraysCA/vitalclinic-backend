@@ -1,4 +1,4 @@
-import { create, find, update, destroy } from '../uses-cases/users/index.js'
+//import { create, find, update, destroy } from '../uses-cases/users/index.js'
 
 const createUser = async (request, response, next) => {
 	const { body: data } = request

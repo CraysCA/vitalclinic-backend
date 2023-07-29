@@ -1,12 +1,13 @@
 import Express from 'express'
 import routes from './interface/routes/index.js'
 import logger from './interface/utils/logger.js'
+import './models/db/connection.js'
+import { config } from './config/config.js'
+const { port } = config.serverSettings
 
 const app = Express()
 
 app.use(Express.json())
 app.use(routes)
 
-const PORT = process.env.PORT || 3000
-
-app.listen(PORT, () => logger.info(`Server is running on port ${PORT}`))
+app.listen(port, () => logger.info(`Server is running on port ${port}`))

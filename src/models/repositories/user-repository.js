@@ -1,5 +1,6 @@
 import { Op } from 'sequelize'
-import { user as userService } from '../db/models/'
+//import { user as userService } from '../db/models/'
+const userService = {}
 
 const create = async ({ data }) => {
 	try {
