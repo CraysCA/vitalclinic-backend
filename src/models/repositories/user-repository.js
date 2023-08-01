@@ -3,46 +3,6 @@ import models from '../db/models/models.js'
 
 const { user: userService } = models
 
-// export default class userRepository {
-// 	constructor() {
-// 		this.userService = userService
-// 	}
-
-// 	async create({ data }) {
-// 		try {
-// 			return await userService.create(data)
-// 		} catch (error) {
-// 			throw new Error(error)
-// 		}
-// 	}
-
-// 	async find({ id }) {
-// 		const conditions = { id: id || { [Op.not]: null } }
-// 		try {
-// 			return await userService.findAll({ where: conditions })
-// 		} catch (error) {
-// 			throw new Error(error)
-// 		}
-// 	}
-
-// 	async update({ id, data }) {
-// 		try {
-// 			const user = await userService.update(data, { where: { id } })
-// 			if (user[0]) return userService.findOne({ where: { id } })
-// 		} catch (error) {
-// 			throw new Error(error)
-// 		}
-// 	}
-
-// 	async destroy({ id }) {
-// 		try {
-// 			return await userService.destroy({ where: { id } })
-// 		} catch (error) {
-// 			throw new Error(error)
-// 		}
-// 	}
-// }
-
 const create = async ({ data }) => {
 	try {
 		return await userService.create(data)
@@ -51,10 +11,17 @@ const create = async ({ data }) => {
 	}
 }
 
-const find = async ({ id }) => {
-	const conditions = { id: id || { [Op.not]: null } }
+const find = async ({ id, email }) => {
+	const conditions = { id: { [Op.not]: null } }
+
+	if (id) conditions.id = id
+	if (email) conditions.email = email
+
 	try {
-		return await userService.findAll({ where: conditions })
+		return await userService.findAll({
+			where: conditions,
+			attributes: { exclude: ['password'] },
+		})
 	} catch (error) {
 		throw new Error(error)
 	}
