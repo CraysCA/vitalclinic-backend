@@ -19,3 +19,5 @@ connection
 	.catch(err => {
 		logger.error('Connection to database failed:', err)
 	})
+
+export default connection

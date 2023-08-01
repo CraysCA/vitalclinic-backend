@@ -1,9 +1,9 @@
-//import { create, find, update, destroy } from '../uses-cases/users/index.js'
+import { Create, Find, Update, Destroy } from '../uses-cases/users/index.js'
 
 const createUser = async (request, response, next) => {
 	const { body: data } = request
 	try {
-		const user = await create({ data })
+		const user = await Create({ data })
 
 		if (user) {
 			response
@@ -22,7 +22,7 @@ const createUser = async (request, response, next) => {
 const findUser = async (request, response, next) => {
 	const { id } = request.params
 	try {
-		const user = await find({ id })
+		const user = await Find({ id })
 		if (user)
 			response
 				.status(200)
@@ -36,7 +36,7 @@ const updateUser = async (request, response, next) => {
 	const { body: data } = request
 	const { id } = request.params
 	try {
-		const user = await update({ id, data })
+		const user = await Update({ id, data })
 
 		if (user) {
 			response
@@ -52,7 +52,7 @@ const updateUser = async (request, response, next) => {
 const deleteUser = async (request, response, next) => {
 	const { id } = request.params
 	try {
-		const user = await destroy({ id })
+		const user = await Destroy({ id })
 
 		if (user) {
 			response.status(200).json({ success: true, message: 'user deleted' })
