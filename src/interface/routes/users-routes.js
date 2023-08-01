@@ -7,6 +7,8 @@ const router = Router()
 
 router.post('/', validate(userSchema.create), usersController.createUser)
 
+router.get('/', usersController.findUser)
+
 //usersController.findUser)
 
 // router.post(
