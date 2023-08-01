@@ -22,6 +22,10 @@ export default (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+			customerId: {
+				field: 'customer_id',
+				type: DataTypes.INTEGER,
+			},
 		},
 		{
 			freezeTableName: true,

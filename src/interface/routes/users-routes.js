@@ -5,9 +5,7 @@ import { usersController } from '../../controller/index.js'
 
 const router = Router()
 
-router.post('/', validate(userSchema.create), (req, res) => {
-	res.status(200).json({ message: 'ok', data: req.body })
-})
+router.post('/', validate(userSchema.create), usersController.createUser)
 
 //usersController.findUser)
 

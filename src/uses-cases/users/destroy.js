@@ -1,8 +1,5 @@
-import { usersRepository } from '../../models/repositories/index.js'
-export default () => {
-	async function execute({ data }) {
-		return usersRepository.destroy({ data })
-	}
+import { userRepository } from '../../models/repositories/index.js'
 
-	return { execute }
+export default ({ data }) => {
+	return userRepository.destroy({ data })
 }
