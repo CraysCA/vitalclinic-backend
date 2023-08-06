@@ -27,6 +27,14 @@ const find = async ({ id, email }) => {
 	}
 }
 
+const getUserByEmail = async ({ email }) => {
+	try {
+		return await userService.findOne({ where: { email } })
+	} catch (error) {
+		throw new Error(error)
+	}
+}
+
 const update = async ({ id, data }) => {
 	try {
 		const user = await userService.update(data, { where: { id } })
@@ -44,4 +52,4 @@ const destroy = async ({ id }) => {
 	}
 }
 
-export default { create, find, update, destroy }
+export default { create, find, update, destroy, getUserByEmail }
