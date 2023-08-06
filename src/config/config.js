@@ -15,4 +15,8 @@ export const config = {
 		logging: process.env.DB_LOGGING === 'true',
 		port: process.env.DB_PORT || 3306,
 	},
+	jwt: {
+		secret: process.env.JWT_SECRET_KEY,
+		isActive: process.env.JWT_IS_ACTIVE === 'true',
+	},
 }

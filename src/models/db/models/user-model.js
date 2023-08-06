@@ -35,7 +35,7 @@ export default (sequelize, DataTypes) => {
 		},
 	)
 	// ! quitar luego
-	user.sync({ alter: true })
+	//user.sync({ alter: true })
 
 	return user
 }
