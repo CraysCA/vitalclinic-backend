@@ -19,4 +19,10 @@ export const config = {
 		secret: process.env.JWT_SECRET_KEY,
 		isActive: process.env.JWT_IS_ACTIVE === 'true',
 	},
+	aws: {
+		bucketName: process.env.AWS_BUCKET_NAME,
+		region: process.env.AWS_BUCKET_REGION,
+		publicKey: process.env.AWS_PUBLIC_KEY,
+		secretKey: process.env.AWS_SECRET_KEY,
+	},
 }

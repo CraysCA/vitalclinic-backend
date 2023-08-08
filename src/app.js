@@ -1,20 +1,38 @@
 import Express from 'express'
+import fileUpload from 'express-fileupload'
+
 import routes from './interface/routes/index.js'
 import logger from './interface/utils/logger.js'
+
 import './models/db/connection.js'
 import './interface/middlewares/auth/index.js'
-import errorHandler from './interface/middlewares/error-handler.js'
-import cors from 'cors'
-//import cors from './interface/middlewares/cros.js'
+
+import {
+	errorHandler,
+	notFoundHandler,
+	cors,
+} from './interface/middlewares/index.js'
+
 import { config } from './config/config.js'
 const { port } = config.serverSettings
 
 const app = Express()
-app.use(cors())
+app.disable('x-powered-by')
+
+app.use(cors)
 
 app.use(Express.json())
 
+app.use(
+	fileUpload({
+		useTempFiles: true,
+		tempFileDir: `${process.cwd()}/src/tmp/`,
+	}),
+)
+
 app.use(routes)
+
+app.use(notFoundHandler)
 
 app.use(errorHandler)
 
