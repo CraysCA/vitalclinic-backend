@@ -5,6 +5,7 @@ export const config = {
 	serverSettings: {
 		env: process.env.NODE_ENV || 'dev',
 		port: process.env.PORT || 3000,
+		host: process.env.HOST || `http://localhost:${process.env.PORT}`,
 	},
 	db: {
 		host: process.env.DB_HOST || 'localhost',

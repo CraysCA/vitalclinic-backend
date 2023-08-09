@@ -5,4 +5,8 @@ const router = Router()
 
 router.post('/upload', filesController.uploadFile)
 
+router.get('/', filesController.findFiles)
+
+router.get('/:id/download', filesController.downloadFile)
+
 export default router
