@@ -5,6 +5,7 @@ export const config = {
 	serverSettings: {
 		env: process.env.NODE_ENV || 'dev',
 		port: process.env.PORT || 3000,
+		host: process.env.HOST || `http://localhost:${process.env.PORT}`,
 	},
 	db: {
 		host: process.env.DB_HOST || 'localhost',
@@ -18,5 +19,11 @@ export const config = {
 	jwt: {
 		secret: process.env.JWT_SECRET_KEY,
 		isActive: process.env.JWT_IS_ACTIVE === 'true',
+	},
+	aws: {
+		bucketName: process.env.AWS_BUCKET_NAME,
+		region: process.env.AWS_BUCKET_REGION,
+		publicKey: process.env.AWS_PUBLIC_KEY,
+		secretKey: process.env.AWS_SECRET_KEY,
 	},
 }
