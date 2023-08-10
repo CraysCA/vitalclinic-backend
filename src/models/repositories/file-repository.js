@@ -11,10 +11,11 @@ const create = async ({ data }) => {
 	}
 }
 
-const find = async ({ id }) => {
+const find = async ({ id, userId, date }) => {
 	const conditions = { id: { [Op.not]: null } }
 
 	if (id) conditions.id = id
+	if (userId) conditions.userId = userId
 
 	try {
 		return await fileService.findAll({

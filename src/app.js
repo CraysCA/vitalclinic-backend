@@ -1,5 +1,6 @@
 import Express from 'express'
 import fileUpload from 'express-fileupload'
+import helmet from 'helmet'
 
 import routes from './interface/routes/index.js'
 import logger from './interface/utils/logger.js'
@@ -18,6 +19,8 @@ const { port } = config.serverSettings
 
 const app = Express()
 app.disable('x-powered-by')
+
+app.use(helmet())
 
 app.use(cors)
 

@@ -23,19 +23,32 @@ export default (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			customerId: {
-				field: 'customer_id',
 				type: DataTypes.INTEGER,
+				allowNull: true,
+			},
+			isAdmin: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			},
+			isEmployee: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			},
+			isClient: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
 			},
 		},
 		{
 			freezeTableName: true,
 			underscored: true,
 			timestamps: false,
+			paranoid: true,
 			hooks: {},
 		},
 	)
 	// ! quitar luego
-	//user.sync({ alter: true })
+	//	user.sync({ alter: true })
 
 	return user
 }

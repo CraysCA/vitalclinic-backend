@@ -27,6 +27,16 @@ const find = async ({ id, email }) => {
 	}
 }
 
+const getUsersForFormatter = async () => {
+	try {
+		return await userService.findAll({
+			attributes: { include: ['id', 'name', 'lastname', 'email'] },
+		})
+	} catch (error) {
+		throw new Error(error)
+	}
+}
+
 const getUserByEmail = async ({ email }) => {
 	try {
 		return await userService.findOne({ where: { email } })
@@ -52,4 +62,11 @@ const destroy = async ({ id }) => {
 	}
 }
 
-export default { create, find, update, destroy, getUserByEmail }
+export default {
+	create,
+	find,
+	update,
+	destroy,
+	getUserByEmail,
+	getUsersForFormatter,
+}
