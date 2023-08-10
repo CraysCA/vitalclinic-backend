@@ -7,23 +7,10 @@ const router = Router()
 
 router.post('/', validate(userSchema.create), usersController.createUser)
 
-router.get('/', usersController.findUser)
+router.get('/', validate(userSchema.getParams), usersController.findUser)
 
-//usersController.findUser)
+router.put('/:id', validate(userSchema.update), usersController.updateUser)
 
-// router.post(
-// 	'/',
-// 	//	validationHandler(userSchema.create),
-// 	usersController.createUser,
-// )
-
-// router.put(
-// 	'/:id',
-// 	// authorization,
-// 	// validationHandler(usersSchema.update)
-// 	usersController.updateUser,
-// )
-
-// router.delete('/:id', usersController.deleteUser)
+router.delete('/:id', validate(userSchema.destroy), usersController.deleteUser)
 
 export default router

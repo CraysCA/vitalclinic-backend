@@ -1,10 +1,13 @@
 import { CreateFile, FindFiles, GetFile } from '../uses-cases/files/index.js'
+import { GetUsersForFormatter } from '../uses-cases/users/index.js'
+import { formatter } from '../interface/utils/index.js'
 
 import path from 'node:path'
 
 import { UploadFile, GetLinkFile } from '../uses-cases/s3/index.js'
 
 const uploadFile = async (request, response, next) => {
+	const userId = Number(request.get('X-User-Id'))
 	const { body: fileData } = request
 
 	let { files } = request.files
@@ -24,6 +27,7 @@ const uploadFile = async (request, response, next) => {
 						filename: name,
 						size: size,
 						path: directory,
+						userId: userId,
 					}
 					const fileData = await CreateFile({ data })
 
@@ -38,10 +42,13 @@ const uploadFile = async (request, response, next) => {
 		)
 
 		if (filesData.length > 0) {
+			const users = await GetUsersForFormatter()
+			const formattedFiles = formatter.formatUsersInFiles(filesData, users)
+
 			response.status(201).json({
 				success: true,
 				message: 'file uploaded && created',
-				data: filesData,
+				data: formattedFiles,
 			})
 		} else {
 			response.status(400).json({
@@ -55,13 +62,19 @@ const uploadFile = async (request, response, next) => {
 }
 
 const findFiles = async (request, response, next) => {
-	const { id } = request.query
+	const { id, userId, date } = request.query
 	try {
-		const files = await FindFiles({ id })
+		const files = await FindFiles({ id, userId, date })
+
 		if (files.length > 0) {
+			const users = await GetUsersForFormatter()
+
+			const formattedFiles = formatter.formatUsersInFiles(files, users)
+			console.log(formattedFiles)
+
 			response
 				.status(200)
-				.json({ success: true, message: 'files listed', data: files })
+				.json({ success: true, message: 'files listed', data: formattedFiles })
 		} else {
 			response.status(200).json({ success: true, message: 'empty list' })
 		}
