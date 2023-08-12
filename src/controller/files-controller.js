@@ -70,7 +70,6 @@ const findFiles = async (request, response, next) => {
 			const users = await GetUsersForFormatter()
 
 			const formattedFiles = formatter.formatUsersInFiles(files, users)
-			console.log(formattedFiles)
 
 			response
 				.status(200)
