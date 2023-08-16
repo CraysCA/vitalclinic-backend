@@ -11,4 +11,4 @@ const corsOptions = {
 	},
 }
 
-export default cors(corsOptions)
+export default cors()
