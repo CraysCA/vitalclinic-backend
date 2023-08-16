@@ -1,5 +1,5 @@
 import cors from 'cors'
-const whitelist = ['http://localhost:3000']
+const whitelist = ['*']
 
 const corsOptions = {
 	origin: function (origin, callback) {
