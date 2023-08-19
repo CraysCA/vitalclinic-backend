@@ -9,6 +9,6 @@ import files from './files-routes.js'
 
 router.use('/users', authorization, headerUserValidation, users)
 router.use('/auth', auth)
-router.use('/files', authorization, headerUserValidation, files)
+router.use('/files', files)
 
 export default router

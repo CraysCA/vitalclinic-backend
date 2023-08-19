@@ -5,7 +5,7 @@ const { secret, isActive } = config.jwt
 
 export default async (request, response, next) => {
 	if (!isActive) return next()
-	const { auth_token: authToken } = request.headers
+	const { auth_token: authToken } = request.cookies
 	try {
 		if (!authToken)
 			return response

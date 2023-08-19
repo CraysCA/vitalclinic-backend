@@ -1,5 +1,5 @@
 import cors from 'cors'
-const whitelist = ['http://localhost:3000', 'http://localhost:5173']
+const whitelist = ['http://localhost:3000']
 
 const corsOptions = {
 	origin: function (origin, callback) {
@@ -11,4 +11,4 @@ const corsOptions = {
 	},
 }
 
-export default cors()
+export default cors(corsOptions)

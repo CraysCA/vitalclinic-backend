@@ -6,8 +6,7 @@ const login = async (request, response, next) => {
 	try {
 		const token = await Login({ userData })
 		if (token) {
-			response.cookie('auth_token', token)
-			response.set('auth_token', token)
+			response.cookie('auth_token', token, { httpOnly: true })
 
 			response.status(200).json({
 				success: true,

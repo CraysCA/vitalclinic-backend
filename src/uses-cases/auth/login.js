@@ -4,9 +4,12 @@ const { secret } = config.jwt
 
 export default async ({ userData }) => {
 	const payload = {
-		sub: userData.id,
-		name: `${userData.name} ${userData.lastname}`,
-		isAdmin: userData.isAdmin,
+		id: userData.id,
+		name: userData.name,
+		lastname: userData.lastname,
+		email: userData.email,
+		type: userData.type,
+		customerId: userData.customerId || null,
 	}
 
 	const token = jwt.sign(payload, secret, { expiresIn: '1d' })

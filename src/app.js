@@ -1,6 +1,7 @@
 import Express from 'express'
 import fileUpload from 'express-fileupload'
 import helmet from 'helmet'
+import cookieParser from 'cookie-parser'
 
 import routes from './interface/routes/index.js'
 import logger from './interface/utils/logger.js'
@@ -25,6 +26,7 @@ app.use(helmet())
 app.use(cors)
 
 app.use(Express.json())
+app.use(cookieParser())
 
 app.use(
 	fileUpload({
