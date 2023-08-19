@@ -7,9 +7,7 @@ const create = {
 		email: Joi.string().lowercase().email().trim().required(),
 		password: Joi.string().trim().required(),
 		customerId: Joi.number().integer().optional(),
-		isClient: Joi.boolean().optional(),
-		isEmployee: Joi.boolean().optional(),
-		isAdmin: Joi.boolean().optional(),
+		type: Joi.number().integer().valid(1, 2, 3).required(),
 	}),
 }
 
@@ -23,9 +21,7 @@ const update = {
 		email: Joi.string().lowercase().email().trim().optional(),
 		password: Joi.string().trim().optional(),
 		customerId: Joi.number().integer().optional(),
-		isClient: Joi.boolean().optional(),
-		isEmployee: Joi.boolean().optional(),
-		isAdmin: Joi.boolean().optional(),
+		type: Joi.number().integer().valid(1, 2, 3).optional(),
 	}),
 }
 
