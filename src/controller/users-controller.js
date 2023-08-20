@@ -34,7 +34,7 @@ const findUser = async (request, response, next) => {
 		if (user)
 			response
 				.status(200)
-				.json({ success: true, message: 'users listed', user })
+				.json({ success: true, message: 'users listed', data: user })
 	} catch (error) {
 		next(error)
 	}
