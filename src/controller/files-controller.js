@@ -12,7 +12,7 @@ import path from 'node:path'
 import { UploadFile, GetLinkFile } from '../uses-cases/s3/index.js'
 
 const uploadFile = async (request, response, next) => {
-	const userId = Number(request.headers['X-User-Id'])
+	const userId = Number(request.headers['x-user-id'])
 	const { body: fileData } = request
 
 	let { files } = request.files
