@@ -1,4 +1,9 @@
-import { CreateFile, FindFiles, GetFile } from '../uses-cases/files/index.js'
+import {
+	CreateFile,
+	FindFiles,
+	GetFile,
+	GetLastFiles,
+} from '../uses-cases/files/index.js'
 import { GetUsersForFormatter } from '../uses-cases/users/index.js'
 import { formatter } from '../interface/utils/index.js'
 
@@ -82,6 +87,26 @@ const findFiles = async (request, response, next) => {
 	}
 }
 
+const getLastFiles = async (request, response, next) => {
+	try {
+		const files = await GetLastFiles()
+
+		if (files.length > 0) {
+			// const users = await GetUsersForFormatter()
+
+			// const formattedFiles = formatter.formatUsersInFiles(files, users)
+
+			response
+				.status(200)
+				.json({ success: true, message: 'files listed', data: files })
+		} else {
+			response.status(200).json({ success: true, message: 'empty list' })
+		}
+	} catch (error) {
+		next(error)
+	}
+}
+
 const downloadFile = async (request, response, next) => {
 	const { id } = request.params
 	try {
@@ -104,4 +129,5 @@ export default {
 	uploadFile,
 	findFiles,
 	downloadFile,
+	getLastFiles,
 }

@@ -15,4 +15,6 @@ router.get('/', authorization, headerUserValidation, filesController.findFiles)
 
 router.get('/:id/download', filesController.downloadFile)
 
+router.get('/inventory', filesController.getLastFiles)
+
 export default router
