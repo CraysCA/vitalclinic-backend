@@ -13,7 +13,7 @@ import { UploadFile, GetLinkFile } from '../uses-cases/s3/index.js'
 
 const uploadFile = async (request, response, next) => {
 	const userId = Number(request.headers['x-user-id'])
-	const { body: fileData } = request
+	const { body } = request
 
 	let { files } = request.files
 
@@ -24,7 +24,7 @@ const uploadFile = async (request, response, next) => {
 			files.map(async file => {
 				const { name, tempFilePath, size } = file
 				const parsedFilename = name.replace(/\s+/g, '_').toLowerCase()
-				const directory = path.join(fileData.folder, parsedFilename)
+				const directory = path.join(body.folder, parsedFilename)
 
 				const isUploaded = await UploadFile(directory, tempFilePath)
 				if (isUploaded) {
@@ -33,6 +33,7 @@ const uploadFile = async (request, response, next) => {
 						size: size,
 						path: directory,
 						userId: userId,
+						isClient: body.isClient,
 					}
 					const fileData = await CreateFile({ data })
 
@@ -67,9 +68,9 @@ const uploadFile = async (request, response, next) => {
 }
 
 const findFiles = async (request, response, next) => {
-	const { id, userId, date } = request.query
+	const { id, userId, date, isClient } = request.query
 	try {
-		const files = await FindFiles({ id, userId, date })
+		const files = await FindFiles({ id, userId, date, isClient })
 
 		if (files.length > 0) {
 			const users = await GetUsersForFormatter()

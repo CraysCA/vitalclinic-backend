@@ -1,5 +1,6 @@
 import { Op } from 'sequelize'
 import models from '../db/models/models.js'
+import dayjs from 'dayjs'
 
 const { file: fileService } = models
 
@@ -11,11 +12,12 @@ const create = async ({ data }) => {
 	}
 }
 
-const find = async ({ id, userId, date }) => {
+const find = async ({ id, userId, date, isClient }) => {
 	const conditions = { id: { [Op.not]: null } }
 
 	if (id) conditions.id = id
 	if (userId) conditions.userId = userId
+	if (isClient) conditions.isClient = isClient
 
 	try {
 		return await fileService.findAll({
@@ -54,10 +56,17 @@ const getFile = async ({ id }) => {
 }
 
 const getLastFiles = async () => {
+	const startDay = dayjs().startOf('date').format()
+	const endDay = dayjs().endOf('date').format()
+
 	try {
 		return await fileService.findAll({
+			where: {
+				isClient: false,
+				createdAt: { [Op.between]: [startDay, endDay] },
+			},
 			limit: 3,
-			order: [['createdAt', 'DESC']],
+			order: [['id', 'DESC']],
 		})
 	} catch (error) {
 		throw new Error(error)

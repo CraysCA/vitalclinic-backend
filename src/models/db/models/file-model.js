@@ -23,6 +23,9 @@ export default (sequelize, DataTypes) => {
 			userId: {
 				type: DataTypes.INTEGER,
 			},
+			isClient: {
+				type: DataTypes.BOOLEAN,
+			},
 			createdAt: {
 				type: DataTypes.DATE,
 				defaultValue: DataTypes.NOW,
