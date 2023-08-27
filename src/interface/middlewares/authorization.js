@@ -5,7 +5,8 @@ const { secret, isActive } = config.jwt
 
 export default async (request, response, next) => {
 	if (!isActive) return next()
-	const { auth_token: authToken } = request.get('auth_token')
+
+	const { auth_token: authToken } = request.headers
 	try {
 		if (!authToken)
 			return response
