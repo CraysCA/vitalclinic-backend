@@ -1,7 +1,7 @@
 import { unauthorized } from '@hapi/boom'
 
 export default (request, response, next) => {
-	const userId = request.get('X-User-Id')
+	const userId = request.headers['X-User-Id']
 
 	if (!userId) {
 		return response.status(401).json({
