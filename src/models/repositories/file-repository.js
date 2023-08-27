@@ -53,4 +53,15 @@ const getFile = async ({ id }) => {
 	}
 }
 
-export default { create, find, update, destroy, getFile }
+const getLastFiles = async () => {
+	try {
+		return await fileService.findAll({
+			limit: 3,
+			order: [['createdAt', 'DESC']],
+		})
+	} catch (error) {
+		throw new Error(error)
+	}
+}
+
+export default { create, find, update, destroy, getFile, getLastFiles }
